@@ -1,9 +1,7 @@
 MyCoroutine = {}
 
 function MyCoroutine.CreatCor()
-
 	cor = coroutine.create(
-
 		function()
 			for i=1,10 do
 				print(i)
@@ -14,13 +12,9 @@ function MyCoroutine.CreatCor()
 				coroutine.yield()
 			end
 		end
-
 	)
-
 	return cor
-
 end
-
 
 function MyCoroutine.RunCor(cor1)
 	coroutine.resume(cor1) --1
