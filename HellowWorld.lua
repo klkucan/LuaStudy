@@ -1,8 +1,6 @@
 --age = 100
 --print(age)
-
---[[
-local arr = {1,"fsf"}
+--[[local arr = {1,"fsf"}
 print(type(arr))
 print(arr[1])
 print(arr[2])
@@ -63,31 +61,23 @@ end
 
 boo(1,2,add)
 --]]
-
---[[
-str =
+--[[str =
 {
 [1] = "a",
 [2] = "b",
 [3] = "c"
 }
 --]]
-
 --str = {name="Sai",age=33}
-
 --print(str["age"])
-
---[[
-for i,v,x in pairs(str) do
+--[[for i,v,x in pairs(str) do
 	print("index = ", i, "value = ", v)
 end
 --]]
 --print(str.name)
 --newt = table.concat(str,'-',1,2)
 --print(newt)
-
---[[
-temp = 3
+--[[temp = 3
 tab = {x = "xxx" , y = fal, z= 99, [temp]=1, 11 ,22}
 --print(tab.temp)
 for i,v in pairs(tab) do
@@ -98,9 +88,7 @@ table.concat(tab,"-", 1,2)
 
 
 --]]
-
---[[
--- use module
+--[[-- use module
 
 -- temp = "local temp1"
 
@@ -115,10 +103,7 @@ print(temp3)
 print(Class.FindGrade(1))
 
 --]]
-
-
 -- use coroutine
-
 --[[require("MyCoroutine")
 cor1 = MyCoroutine.CreatCor()
 print(cor1)
@@ -157,9 +142,6 @@ print("main", coroutine.resume(co, "x", "y")) -- true 10 end
 print("---分割线---")
 print("main", coroutine.resume(co, "x", "y")) -- cannot resume dead coroutine
 print("---分割线---")--]]
-
-
-
 --[[mytable =
 {
 key1 = 1,
@@ -189,17 +171,13 @@ end
 setmetatable(mytable,mt)
 
 print(mytable.key4)--]]
-
 --[[local p = "D:/Program Files (x86)/Lua/5.1/lua/"
 local m_package_path = package.path
 package.path = string.format("%s?.lua;%s?/init.lua;%s;%s", p, p, m_package_path,"D:/Program Files (x86)/Lua/5.1/clibs/socket/")
 
 -- ;.\?.lua;d:\Program Files (x86)\Lua\5.1\lua\?.lua;d:\Program Files (x86)\Lua\5.1\lua\?\init.lua;d:\Program Files (x86)\Lua\5.1\?.lua;d:\Program Files (x86)\Lua\5.1\?\init.lua;d:\Program Files (x86)\Lua\5.1\lua\?.luac
 --]]
-
-
 --print(package.path)
-
 package.path = ";.\?.lua;d:\Program Files (x86)\Lua\5.1\lua\?.lua;d:\Program Files (x86)\Lua\5.1\lua\?\init.lua;d:\Program Files (x86)\Lua\5.1\?.lua;d:\Program Files (x86)\Lua\5.1\?\init.lua;d:\Program Files (x86)\Lua\5.1\lua\?.luac"
 
 --[[local mt = {}
@@ -210,21 +188,24 @@ end
 local t = {1, 2, 3}
 print(t)
 setmetatable(t, mt)--]]
-
 --print(t)
-
+--[[
 require("socket")
 
 function sleep(n)
-   socket.select(nil, nil, n)
+	socket.select(nil, nil, n)
 end
 sleep(4)
-
+--]]
 f = {key1 = 1}
-f.__index = function(t, key)
+
+mf = {}
+mf.__index = function(t, key)
 	if key == "key2" then
-		return 2 
-	end 
+		return 2
+	end
 end
 
-print(f.key2)
+setmetatable(f, mf)
+
+print(f.key2) 
