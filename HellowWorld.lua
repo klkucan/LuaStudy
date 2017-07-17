@@ -160,7 +160,71 @@ print("---分割线---")--]]
 
 
 
-mytable = setmetatable({},{})
-mt = getmetatable(mytable)
-print(mt, mytable)
+--[[mytable =
+{
+key1 = 1,
+key2 =2
+}
+mt = {}
 
+mt.__index =
+function (t,key)
+	if key == "key3" then
+		return 3
+	elseif key == "key4"  then
+		return 4
+	else
+		return 0
+	end
+	
+end
+
+mt.__newindex =
+function (t,key,value)
+	t.key = value
+end
+
+
+
+setmetatable(mytable,mt)
+
+print(mytable.key4)--]]
+
+--[[local p = "D:/Program Files (x86)/Lua/5.1/lua/"
+local m_package_path = package.path
+package.path = string.format("%s?.lua;%s?/init.lua;%s;%s", p, p, m_package_path,"D:/Program Files (x86)/Lua/5.1/clibs/socket/")
+
+-- ;.\?.lua;d:\Program Files (x86)\Lua\5.1\lua\?.lua;d:\Program Files (x86)\Lua\5.1\lua\?\init.lua;d:\Program Files (x86)\Lua\5.1\?.lua;d:\Program Files (x86)\Lua\5.1\?\init.lua;d:\Program Files (x86)\Lua\5.1\lua\?.luac
+--]]
+
+
+--print(package.path)
+
+package.path = ";.\?.lua;d:\Program Files (x86)\Lua\5.1\lua\?.lua;d:\Program Files (x86)\Lua\5.1\lua\?\init.lua;d:\Program Files (x86)\Lua\5.1\?.lua;d:\Program Files (x86)\Lua\5.1\?\init.lua;d:\Program Files (x86)\Lua\5.1\lua\?.luac"
+
+--[[local mt = {}
+mt.__tostring = function (t)
+	return '{' .. table.concat(t, ', ') .. '}'
+end
+
+local t = {1, 2, 3}
+print(t)
+setmetatable(t, mt)--]]
+
+--print(t)
+
+require("socket")
+
+function sleep(n)
+   socket.select(nil, nil, n)
+end
+sleep(4)
+
+f = {key1 = 1}
+f.__index = function(t, key)
+	if key == "key2" then
+		return 2 
+	end 
+end
+
+print(f.key2)
