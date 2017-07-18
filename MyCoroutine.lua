@@ -1,6 +1,7 @@
 MyCoroutine = {}
 
 function MyCoroutine.CreatCor()
+	print("called")
 	cor = coroutine.create(
 		function()
 			for i=1,10 do
