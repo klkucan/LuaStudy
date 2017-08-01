@@ -1,16 +1,11 @@
-mytable =
-{
-key1 = 1,
-key2 =2
-}
 mt = {}
 
 mt.__index =
 function (t,key)
 	if key == "key3" then
-		return 3
+		return 5
 	elseif key == "key4"  then
-		return 4
+		return 6
 	else
 		return 0
 	end
@@ -22,39 +17,34 @@ function (t,key,value)
 	t.key = value
 end
 
-
-
-setmetatable(mytable,mt)
-
-print(mytable.key4)
-
-
-local mt = {}
 mt.__tostring = function (t)
-	return '{' .. table.concat(t, ', ') .. '}'
+	local tempTable = {}
+	local index = 0
+	for i,v in pairs(t) do
+		index = index + 1
+		tempTable[index] = v
+		print(i.."/"..v)
+	end
+	return '{' .. table.concat(tempTable, ', ') .. '}'
 end
 
-local t = {1, 2, 3}
-print(t)
+-- 一旦定义了__metatable，就代表getmetatable只能得到这个函数的值，
+-- 而不能再次赋值,否则会报错“cannot change a protected metatable”
+mt.__metatable = "不能看啊不能看"
+
+
+local t = {1, 2, 3, key1 = 3,key2 = 4}
 setmetatable(t, mt)
 print(t)
 
+print(getmetatable(t))
 
-f = {key1 = 1}
-
-mf = {}
-mf.__index = function (t, key)
-	if key == "key2" then
-		return 2
-	end
-end
-
-setmetatable(f, mf)
+print(t["key4"])
 
 
+mt2 = {}
 
-print(f.key2)
-a={2}
-if next(a) ~= nil then
-	print(next(a))
-end
+-- 下面的代码会报错
+--setmetatable(t,mt2)
+
+
